@@ -13,8 +13,19 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Events') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.*')">
+                        {{ __('My Tickets') }}
+                    </x-nav-link>
+                    @if(auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
+                            {{ __('Admin Events') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.verify')" :active="request()->routeIs('admin.verify')">
+                            {{ __('Verify Tickets') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

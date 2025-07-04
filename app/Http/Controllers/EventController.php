@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Ticket;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller; // ✅ Add this line
-
 
 class EventController extends Controller
 {
-    // 1. Show all events
+    // 1. Show all published events
     public function index()
     {
-        $events = Event::all();
+        $events = Event::where('status', 'published')
+                      ->where('date', '>', now())
+                      ->orderBy('date', 'asc')
+                      ->get();
         return view('events.index', compact('events'));
     }
 
@@ -22,20 +23,32 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
 
+        // Check if event is published and not cancelled
+        if ($event->status !== 'published') {
+            return redirect()->back()->with('error', 'This event is not available for registration.');
+        }
+
+        // Check if event is full
+        if ($event->isFull()) {
+            return redirect()->back()->with('error', 'This event is full.');
+        }
+
         // Prevent duplicate registration
         $exists = Ticket::where('user_id', auth()->id())
                         ->where('event_id', $id)
                         ->exists();
 
-        if (!$exists) {
-            Ticket::create([
-                'user_id' => auth()->id(),
-                'event_id' => $id,
-                'ticket_code' => strtoupper(Str::random(10)),
-            ]);
+        if ($exists) {
+            return redirect()->back()->with('error', 'You are already registered for this event.');
         }
 
-        return redirect('/my-tickets')->with('success', 'Registered successfully!');
+        Ticket::create([
+            'user_id' => auth()->id(),
+            'event_id' => $id,
+            'ticket_code' => strtoupper(Str::random(10)),
+        ]);
+
+        return redirect('/my-tickets')->with('success', 'Successfully registered for the event!');
     }
 
     // 3. Show my tickets
