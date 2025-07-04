@@ -38,4 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tickets/verify', [TicketController::class, 'verify'])->name('tickets.verify');
 });
 
+// Test route for theme toggle
+Route::get('/test-theme', function () {
+    return view('test-theme');
+});
+
 require __DIR__.'/auth.php';
