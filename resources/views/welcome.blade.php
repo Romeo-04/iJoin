@@ -24,7 +24,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <x-application-logo class="w-8 h-8 text-indigo-600" />
+                    <img id="welcome-logo" src="{{ asset('images/logo (normal).svg') }}" alt="Application Logo" class="w-10 h-6 text-indigo-600">
                     <h1 class="ml-3 text-xl font-bold text-gray-900 dark:text-white">EventEase</h1>
                 </div>
 
@@ -44,16 +44,18 @@
     @if (Route::has('login'))
         @auth
             <!-- Authenticated User - Redirect to Dashboard -->
-            <div class="min-h-screen flex items-center justify-center">
+            <div class="min-h-screen bg-gradient-to-br from-blue-400 to-purple-500 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 flex items-center justify-center">
                 <div class="text-center">
                     <div class="mb-8">
-                        <x-application-logo class="w-20 h-20 text-indigo-600 mx-auto" />
-                        <h1 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white">Welcome back to EventEase!</h1>
-                        <p class="mt-2 text-gray-600 dark:text-gray-400">You're already logged in.</p>
+                        <img id="welcome-logo-auth" src="{{ asset('images/logo (normal).svg') }}" alt="Application Logo" class="w-20 h-20 text-indigo-600 mx-auto filter dark:invert">
                     </div>
-                    <a href="{{ url('/dashboard') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
-                        Go to Dashboard
-                    </a>
+                    <div class="bg-transparent text-center mx-auto w-full max-w-3xl">
+                        <h1 class="text-4xl font-bold text-white mb-4">Welcome back to EventEase!</h1>
+                        <p class="mb-8 text-white">You're already logged in.</p>
+                        <a href="{{ url('/dashboard') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
+                            Go to Dashboard
+                        </a>
+                    </div>
                 </div>
             </div>
         @else
@@ -63,7 +65,7 @@
                     <!-- Header -->
                     <div class="text-center">
                         <div class="mb-8">
-                            <x-application-logo class="w-16 h-16 text-white mx-auto" />
+                            <img id="welcome-logo-guest" src="{{ asset('images/logo (normal).svg') }}" alt="Application Logo" class="w-16 h-16 text-white mx-auto">
                         </div>
                         <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
                             Welcome to EventEase
@@ -211,6 +213,34 @@
                 darkIcon.classList.add('hidden');
                 lightIcon.classList.remove('hidden');
             }
+        });
+
+        // Logo swap for welcome page (works for all logo instances)
+        function updateWelcomeLogos() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const normalLogo = "{{ asset('images/logo (normal).svg') }}";
+            const nightLogo = "{{ asset('images/logo (night).svg') }}";
+            [
+                document.getElementById('welcome-logo'),
+                document.getElementById('welcome-logo-auth'),
+                document.getElementById('welcome-logo-guest')
+            ].forEach(function(logo) {
+                if (logo) logo.src = isDark ? nightLogo : normalLogo;
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            updateWelcomeLogos();
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        updateWelcomeLogos();
+                    }
+                });
+            });
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
         });
     </script>
 </body>
