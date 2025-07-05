@@ -63,57 +63,45 @@
             <div class="min-h-screen bg-gradient-to-br from-blue-400 to-purple-500 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-4xl w-full space-y-8">
                     <!-- Header -->
-                    <div class="text-center">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 text-center flex flex-col justify-between h-full mb-8">
                         <div class="mb-8">
                             <img id="welcome-logo-guest" src="{{ asset('images/logo (normal).svg') }}" alt="Application Logo" class="w-16 h-16 text-white mx-auto">
                         </div>
-                        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
                             Welcome to EventEase
                         </h1>
-                        <p class="text-xl md:text-2xl text-gray-100 mb-8 max-w-2xl mx-auto">
+                        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-100 mb-0 max-w-2xl mx-auto">
                             Your all-in-one platform for creating, managing, and attending events. 
                             Get started today and make event management effortless.
                         </p>
                     </div>
 
                     <!-- Authentication Options -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto min-h-[480px]">
                         <!-- Sign Up Card -->
-                        <div class="auth-card bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 text-center">
-                            <div class="mb-6">
-                                <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-                                    </svg>
+                        <div class="auth-card bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 text-center flex flex-col justify-between h-full">
+                            <div>
+                                <div class="mb-6">
+                                    <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <svg class="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">New to EventEase?</h2>
+                                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                                        Create your free account and start organizing amazing events today.
+                                    </p>
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-6">
+                                        <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Key Features:</p>
+                                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1 text-left">
+                                            <li>• Free account setup</li>
+                                            <li>• Create unlimited events</li>
+                                            <li>• Easy ticket management</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">New to EventEase?</h2>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    Create your free account and start organizing amazing events today.
-                                </p>
                             </div>
-                            
-                            <div class="space-y-4">
-                                <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 mb-6">
-                                    <li class="flex items-center">
-                                        <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        Free account setup
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        Create unlimited events
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        Easy ticket management
-                                    </li>
-                                </ul>
-                                
+                            <div>
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-300 shadow-lg block">
                                         Create Free Account
@@ -123,20 +111,19 @@
                         </div>
 
                         <!-- Login Card -->
-                        <div class="auth-card bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 text-center">
-                            <div class="mb-6">
-                                <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-                                    </svg>
+                        <div class="auth-card bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 text-center flex flex-col justify-between h-full">
+                            <div>
+                                <div class="mb-6">
+                                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Already a Member?</h2>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Welcome back! Sign in to access your events and continue managing your activities.
+                                    </p>
                                 </div>
-                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Already a Member?</h2>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    Welcome back! Sign in to access your events and continue managing your activities.
-                                </p>
-                            </div>
-
-                            <div class="space-y-4">
                                 <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-6">
                                     <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Quick Access:</p>
                                     <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
@@ -145,7 +132,8 @@
                                         <li>• Manage your profile</li>
                                     </ul>
                                 </div>
-                                
+                            </div>
+                            <div>
                                 <a href="{{ route('login') }}" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-300 shadow-lg block">
                                     Sign In
                                 </a>
