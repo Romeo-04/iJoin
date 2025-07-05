@@ -19,7 +19,7 @@
                                 @if($ticket->event->location)
                                     <p><span class="font-semibold">📍 Location:</span> {{ $ticket->event->location }}</p>
                                 @endif
-                                <p><span class="font-semibold">💰 Price:</span> ${{ number_format($ticket->event->price, 2) }}</p>
+                                <p><span class="font-semibold">💰 Price:</span> ₱{{ number_format($ticket->event->price, 2) }}</p>
                             </div>
                         </div>
                         <div class="text-right">

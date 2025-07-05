@@ -25,7 +25,7 @@
                         <div class="space-y-3">
                             <p><span class="font-semibold">Description:</span> {{ $event->description ?: 'No description provided' }}</p>
                             <p><span class="font-semibold">Location:</span> {{ $event->location ?: 'No location specified' }}</p>
-                            <p><span class="font-semibold">Price:</span> ${{ number_format($event->price, 2) }}</p>
+                            <p><span class="font-semibold">Price:</span> ₱{{ number_format($event->price, 2) }}</p>
                             <p><span class="font-semibold">Status:</span> 
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                     {{ $event->status === 'published' ? 'bg-green-100 text-green-800' : '' }}

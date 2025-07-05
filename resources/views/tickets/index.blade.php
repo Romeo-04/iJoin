@@ -39,7 +39,7 @@
                                             </p>
                                         @endif
                                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                                            <strong>💰 Price:</strong> ${{ number_format($ticket->event->price, 2) }}
+                                            <strong>💰 Price:</strong> ₱{{ number_format($ticket->event->price, 2) }}
                                         </p>
                                     </div>
                                     <div>
