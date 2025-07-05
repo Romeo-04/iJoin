@@ -6,6 +6,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\TicketController;
 
+// Landing page - Home route
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+// Authenticated routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [EventController::class, 'index'])->name('dashboard');
     Route::get('/register/{id}', [EventController::class, 'register'])->name('events.register');
@@ -16,12 +22,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tickets/verify', [TicketController::class, 'verify'])->name('tickets.verify');
 });
 
+// Profile routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Admin routes
 Route::middleware(['auth', \App\Http\Middleware\AdminOnly::class])->prefix('admin')->group(function () {
     Route::get('/events', [AdminEventController::class, 'index'])->name('admin.events.index');
     Route::get('/events/create', [AdminEventController::class, 'create'])->name('admin.events.create');
@@ -36,11 +44,6 @@ Route::middleware(['auth', \App\Http\Middleware\AdminOnly::class])->prefix('admi
 // Public ticket verification (accessible to all authenticated users)
 Route::middleware(['auth'])->group(function () {
     Route::post('/tickets/verify', [TicketController::class, 'verify'])->name('tickets.verify');
-});
-
-// Test route for theme toggle
-Route::get('/test-theme', function () {
-    return view('test-theme');
 });
 
 require __DIR__.'/auth.php';
