@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Ticket;
+use App\Services\BarcodeService;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -33,8 +35,14 @@ class EventController extends Controller
             return redirect()->back()->with('error', 'This event is full.');
         }
 
+        $user = Auth::user();
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'You must be logged in to register for an event.');
+        }
+
         // Prevent duplicate registration
-        $exists = Ticket::where('user_id', auth()->id())
+        $exists = Ticket::where('user_id', $user->id)
                         ->where('event_id', $id)
                         ->exists();
 
@@ -42,10 +50,14 @@ class EventController extends Controller
             return redirect()->back()->with('error', 'You are already registered for this event.');
         }
 
+        $ticketCode = strtoupper(Str::random(10));
+        $barcodeUrl = BarcodeService::generateBarcodeUrl($ticketCode);
+
         Ticket::create([
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'event_id' => $id,
-            'ticket_code' => strtoupper(Str::random(10)),
+            'ticket_code' => $ticketCode,
+            'barcode_url' => $barcodeUrl,
         ]);
 
         return redirect('/my-tickets')->with('success', 'Successfully registered for the event!');
@@ -54,8 +66,12 @@ class EventController extends Controller
     // 3. Show my tickets
     public function myTickets()
     {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'You must be logged in to view your tickets.');
+        }
         $tickets = Ticket::with('event')
-                         ->where('user_id', auth()->id())
+                         ->where('user_id', $user->id)
                          ->get();
 
         return view('tickets.index', compact('tickets'));

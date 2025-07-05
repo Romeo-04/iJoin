@@ -23,9 +23,11 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <div class="bg-white/20 rounded-lg p-4">
-                                <p class="text-sm opacity-80">Ticket Code</p>
-                                <p class="text-2xl font-mono font-bold">{{ $ticket->ticket_code }}</p>
+                            <div class="bg-white/20 rounded-lg p-6">
+                                <p class="text-sm opacity-80 mb-2">Ticket Code</p>
+                                <p class="text-2xl font-mono font-bold mb-6">{{ $ticket->ticket_code }}</p>
+                                
+                                
                                 <div class="mt-4">
                                     @if($ticket->is_verified)
                                         <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm">✅ Verified</span>
@@ -67,10 +69,52 @@
                     </div>
                 </div>
 
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mt-6">
+                    <h3 class="text-lg font-semibold mb-4 text-center">📱 Scan Codes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <p class="text-sm font-medium mb-3">Barcode</p>
+                            <div class="bg-white rounded-lg p-4 border shadow-sm flex items-center justify-center" style="height: 140px;">
+                                @if($ticket->getBarcodeUrl())
+                                    <img src="{{ $ticket->getBarcodeUrl() }}" 
+                                         alt="Barcode for {{ $ticket->ticket_code }}" 
+                                         class="mx-auto max-w-full h-auto"
+                                         style="max-height: 60px;">
+                                @else
+                                    <div class="text-gray-400 text-xs">
+                                        <p>Barcode</p>
+                                        <p>Unavailable</p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-sm font-medium mb-3">QR Code</p>
+                            <div class="bg-white rounded-lg p-4 border shadow-sm flex items-center justify-center" style="height: 140px;">
+                                @if($ticket->getQRCodeUrl())
+                                    <img src="{{ $ticket->getQRCodeUrl() }}" 
+                                         alt="QR Code for {{ $ticket->ticket_code }}" 
+                                         class="mx-auto max-w-full h-auto"
+                                         style="max-height: 100px; max-width: 100px;">
+                                @else
+                                    <div class="text-gray-400 text-xs">
+                                        <p>QR Code</p>
+                                        <p>Unavailable</p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4 text-center">
+                        Present either code at the event entrance for quick verification
+                    </p>
+                </div>
+
                 <div class="mt-8 text-center">
                     <div class="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 mb-4">
                         <p class="text-sm text-blue-800 dark:text-blue-200">
-                            💡 <strong>Pro Tip:</strong> Save this page or take a screenshot of your ticket code for easy access at the event.
+                            💡 <strong>Pro Tip:</strong> Present your barcode at the event entrance for quick verification.
                         </p>
                     </div>
                     

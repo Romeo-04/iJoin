@@ -50,6 +50,14 @@
                                         <p class="text-sm text-gray-500 dark:text-gray-400">
                                             <strong>📝 Registered:</strong> {{ $ticket->created_at->format('M d, Y H:i') }}
                                         </p>
+                                        @if($ticket->getBarcodeUrl())
+                                            <div class="mt-2">
+                                                <img src="{{ $ticket->getBarcodeUrl() }}" 
+                                                     alt="Barcode" 
+                                                     class="h-6 bg-white rounded border"
+                                                     style="max-width: 120px;">
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 
