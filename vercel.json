@@ -1,0 +1,45 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "outputDirectory": "public",
+    "version": 2,
+    "framework": null,
+    "functions": {
+        "api/index.php": {
+            "runtime": "vercel-php@0.6.0"
+        }
+    },
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.php"
+        }
+    ],
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://ijoin.vercel.app",
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+        "CACHE_DRIVER": "array",
+        "LOG_CHANNEL": "stderr",
+        "SESSION_DRIVER": "cookie",
+        "SSR_TEMP_PATH": "/tmp/ssr",
+        "NODE_PATH": "node",
+        "DB_CONNECTION": "pgsql",
+        "DB_HOST": "db.your-project-ref.supabase.co",
+        "DB_PORT": "5432",
+        "DB_DATABASE": "postgres",
+        "DB_USERNAME": "postgres",
+        "DB_PASSWORD": "your-supabase-password"
+    },
+    "build": {
+        "env": {
+            "APP_ENV": "production",
+            "APP_DEBUG": "false"
+        }
+    }
+} 
